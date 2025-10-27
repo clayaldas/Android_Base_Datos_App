@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Android_Base_Datos_App</string>
+
+    <string name="textViewTitle_text">Productos</string>
+    <string name="editTextCode_hint">Código</string>
+    <string name="editTextName_hint">Ingrese el nombre</string>
+    <string name="editTextQuantity_hint">Ingrese la cantidad</string>
+    <string name="editTextPrice_hint">Ingrese el precio</string>
+
+    <string name="buttonInsert_text">Insertar</string>
+    <string name="buttonSelectByCode_text">Buscar por codigo</string>
+    <string name="buttonUpdate_text">Actualizar</string>
+    <string name="buttonDelete_text">Eliminar</string>
+    <string name="buttonSelectAll_text">Mostrar todos</string>
+
+</resources>
