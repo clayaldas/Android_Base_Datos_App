@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Base_Datos_App">
         <activity
+            android:name=".AllProductsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
