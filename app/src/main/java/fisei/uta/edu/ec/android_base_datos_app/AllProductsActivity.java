@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class AllProductsActivity extends AppCompatActivity {
     private ListView listViewProducts;
     ArrayList<String> list;// mostrar los datos de los productos
     ArrayAdapter adapter;// auxuliar parea llenar el listiview
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,22 +38,40 @@ public class AllProductsActivity extends AppCompatActivity {
         // llenar los datos con un metodo que retorna un ArrayList
         list = FillListView();
 
+        // crear el adapter
+        //adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+
+        // vincular el adapter al ListView
+        listViewProducts.setAdapter(adapter);
     }
 
     private ArrayList FillListView() {
-        AdminPersistence persistence = new AdminPersistence(this, "Sales", null, 1);
+        AdminPersistence persistence = new AdminPersistence(this, "SALES", null, 1);
         SQLiteDatabase database = persistence.getReadableDatabase();
 
-        ArrayList<String> arrayList  = new ArrayList<String>();
+        ArrayList<String> arrayList = new ArrayList<String>();
         String SELECT = "SELECT Code, Name, Quantity, Price " +
-                         "FROM Products";
+                "FROM Products";
+        try
+        {
+            Cursor row = database.rawQuery(SELECT, null);
 
-        Cursor row = database.rawQuery(SELECT, null);
-
-        if ( row.moveToFirst()) {
-            while (row.moveToNext()) {
-                arrayList.add(row.getString(0));
-            }
+            //if ( row.moveToFirst()) {
+                //Toast.makeText(this, "datos", Toast.LENGTH_SHORT).show();
+                while (row.moveToNext()) {
+                    arrayList.add(row.getString(0) + " " + row.getString(1) +
+                            "  " + row.getString(2) + " " + row.getString(3));
+                }
+            //}
+            // Cerrar el cursor
+            row.close();
+        }
+        catch (Exception exception) {
+            Toast.makeText(this, "Error de Base de Datos", Toast.LENGTH_SHORT).show();
+        }
+        finally {
+            database.close();
         }
         return arrayList;
     }

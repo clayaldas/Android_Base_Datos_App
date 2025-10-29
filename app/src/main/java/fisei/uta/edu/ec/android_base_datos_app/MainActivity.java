@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 cleanControls();
             }
+            // Cerrar el cursor
+            row.close();
         }
         catch (Exception exception) {
             Toast.makeText(this, "Error de Base de Datos",
